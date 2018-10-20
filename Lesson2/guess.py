@@ -6,7 +6,6 @@ for attempt in range(5):
     x=int(input())
     if x==y:
         guessed = True
-        print("congrats")
         break
     elif x<y:
         print("too small")
@@ -15,3 +14,5 @@ for attempt in range(5):
 
 if not guessed:
     print("Looser")
+else:
+    print("Congrats!")
