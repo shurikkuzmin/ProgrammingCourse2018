@@ -32,6 +32,17 @@ def playComputer(field):
     for i in range(9):
         if field[i]==" ":
             free.append(i)
+    for i in free:
+        field2=field.copy()
+        field2[i]="O"
+        if checkWin(field2,"O")==True:
+            return i
+    for i in free:
+        field2=field.copy()
+        field2[i]="X"
+        if checkWin(field2,"X")==True:
+            return i
+    
     randomIndex= random.randint(0,len(free)-1)
     return free[randomIndex]
 
@@ -43,11 +54,15 @@ for attempt in range(9):
         print("Computer turn: ")
         index=playComputer(field)
     else: 
-        print("Hi, in which row do you want to put your item?")
-        i = int(input())
-        print("In which column do you want to put your item?")
-        j = int(input())  
-        index = (i-1)*3 + j-1
+        while True:
+            print("Hi, in which row do you want to put your item?")
+            i = int(input())
+            print("In which column do you want to put your item?")
+            j = int(input())  
+            index = (i-1)*3 + j-1
+            if field[index] == " ":
+                break
+        
     field[index] = token
     drawField(field)
     checkWin(field,token)
