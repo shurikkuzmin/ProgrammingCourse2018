@@ -15,17 +15,18 @@ BLUE = (0, 0, 255)
 
 windowSurface.fill(WHITE)
 
-cross = pygame.Surface((100,100))
+cross = pygame.Surface((90,90))
 crossRect = cross.get_rect()
 cross.fill(WHITE)
 
-pygame.draw.line(cross, RED,(20,20),(80,80),3) 
-pygame.draw.line(cross, RED,(80,20),(20,80),3) 
+pygame.draw.line(cross, RED,(20,20),(70,70),3) 
+pygame.draw.line(cross, RED,(70,20),(20,70),3) 
  
-circle = pygame.Surface((100,100))
+circle = pygame.Surface((90,90))
 circle.fill(WHITE)
 circleRect = circle.get_rect()
-pygame.draw.circle(circle, GREEN,(50,50),30)  
+pygame.draw.circle(circle, GREEN,(45,45),30,3)  
+
 
 
 pygame.draw.line(windowSurface, BLUE, (100, 0), (100, 300), 3)
@@ -33,13 +34,15 @@ pygame.draw.line(windowSurface, BLUE, (200, 0), (200, 300), 3)
 pygame.draw.line(windowSurface, BLUE, (0, 100), (300, 100), 3)
 pygame.draw.line(windowSurface, BLUE, (0, 200), (300, 200), 3)
 
-crossRect.center = (50,50)
-windowSurface.blit(cross,crossRect)
-crossRect.center = (150,150)
-windowSurface.blit(cross,crossRect)
+field=["X"," ","0","X"," ","0"," "," ","X"]
+for i in range(9):
+    if field[i]=="X":
+         crossRect.center = ((i%3)*100+50,int(i/3)*100+50)
+         windowSurface.blit(cross,crossRect)
+    if field[i]=="0":
+         circleRect.center = ((i%3)*100+50,int(i/3)*100+50)
+         windowSurface.blit(circle,circleRect)
 
-circleRect.center = (250,50)
-windowSurface.blit(circle,circleRect)
 
 pygame.display.update()
 
