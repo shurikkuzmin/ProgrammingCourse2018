@@ -3,39 +3,31 @@ from pygame.locals import *
 
 # Set up pygame.
 pygame.init()
-mainClock = pygame.time.Clock()
+#mainClock = pygame.time.Clock()
 
 # Set up the window.
-WINDOWWIDTH = 400
-WINDOWHEIGHT = 400
-windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT),
-  0, 32)
-pygame.display.set_caption('Collision Detection')
+WINDOWWIDTH = 800
+WINDOWHEIGHT = 200
+windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT),0, 32)
+pygame.display.set_caption('Dino')
 
 # Set up the colors.
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
 
-# Set up the player and food data structures.
-foodCounter = 0
-NEWFOOD = 40
-FOODSIZE = 20
-player = pygame.image.load('sprite_1.png')
-playerRect = player.get_rect()
-foods = []
-for i in range(20):
-    foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE),
-      random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
+bigSprite  = pygame.image.load('sprite.png')
+bigSpriteRect = bigSprite.get_rect()
 
-# Set up movement variables.
-moveLeft = False
-moveRight = False
-moveUp = False
-moveDown = False
+rect = pygame.Rect((1336,0,90,96))
+dino = bigSprite.subsurface(rect)
+dinoRect=dino.get_rect()
 
-MOVESPEED = 6
 
+SPEED = 6
+
+windowSurface.blit(dino,dinoRect)
+pygame.display.update()
 
 # Run the game loop.
 while True:
@@ -44,76 +36,62 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+
         if event.type == KEYDOWN:
             # Change the keyboard variables.
-            if event.key == K_LEFT or event.key == K_a:
+            if event.key == K_LEFT: 
                 moveRight = False
                 moveLeft = True
-            if event.key == K_RIGHT or event.key == K_d:
+            if event.key == K_RIGHT: 
                 moveLeft = False
                 moveRight = True
-            if event.key == K_UP or event.key == K_w:
+            if event.key == K_UP: 
                 moveDown = False
                 moveUp = True
-            if event.key == K_DOWN or event.key == K_s:
+            if event.key == K_DOWN: 
                 moveUp = False
                 moveDown = True
-        if event.type == KEYUP:
-            if event.key == K_ESCAPE:
-                pygame.quit()
-                sys.exit()
-            if event.key == K_LEFT or event.key == K_a:
-                moveLeft = False
-            if event.key == K_RIGHT or event.key == K_d:
-                moveRight = False
-            if event.key == K_UP or event.key == K_w:
-                moveUp = False
-            if event.key == K_DOWN or event.key == K_s:
-                moveDown = False
-            if event.key == K_x:
-                player.top = random.randint(0, WINDOWHEIGHT -
-                  player.height)
-                player.left = random.randint(0, WINDOWWIDTH -
-                  player.width)
+            if event.type == KEYUP:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+#             if event.key == K_LEFT or event.key == K_a:
+#                 moveLeft = False
+#             if event.key == K_RIGHT or event.key == K_d:
+#                 moveRight = False
+#             if event.key == K_UP or event.key == K_w:
+#                 moveUp = False
+#             if event.key == K_DOWN or event.key == K_s:
+#                 moveDown = False
+#             if event.key == K_x:
+#                 player.top = random.randint(0, WINDOWHEIGHT -
+#                   player.height)
+#                 player.left = random.randint(0, WINDOWWIDTH -
+#                   player.width)
 
-        if event.type == MOUSEBUTTONUP:
-            foods.append(pygame.Rect(event.pos[0], event.pos[1],
-              FOODSIZE, FOODSIZE))
+#    # Draw the white background onto the surface.
+#    windowSurface.fill(WHITE)
 
-    foodCounter += 1
-    if foodCounter >= NEWFOOD:
-        # Add new food.
-        foodCounter = 0
-        foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH -
-          FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE),
-          FOODSIZE, FOODSIZE))
+#     # Move the player.
+#     if moveDown and playerRect.bottom < WINDOWHEIGHT:
+#         playerRect.top += MOVESPEED
+#     if moveUp and playerRect.top > 0:
+#         playerRect.top -= MOVESPEED
+#     if moveLeft and playerRect.left > 0:
+#         playerRect.left -= MOVESPEED
+#     if moveRight and playerRect.right < WINDOWWIDTH:
+#         playerRect.right += MOVESPEED
 
-    # Draw the white background onto the surface.
-    windowSurface.fill(WHITE)
+#     # Draw the player onto the surface.
+#     #pygame.draw.rect(windowSurface, BLACK, player)
+#     windowSurface.blit(player, playerRect)
 
-    # Move the player.
-    if moveDown and playerRect.bottom < WINDOWHEIGHT:
-        playerRect.top += MOVESPEED
-    if moveUp and playerRect.top > 0:
-        playerRect.top -= MOVESPEED
-    if moveLeft and playerRect.left > 0:
-        playerRect.left -= MOVESPEED
-    if moveRight and playerRect.right < WINDOWWIDTH:
-        playerRect.right += MOVESPEED
+#     # Check whether the player has intersected with any food squares.
+#     for food in foods[:]:
+#         if playerRect.colliderect(food):
+#             foods.remove(food)
 
-    # Draw the player onto the surface.
-    #pygame.draw.rect(windowSurface, BLACK, player)
-    windowSurface.blit(player, playerRect)
 
-    # Check whether the player has intersected with any food squares.
-    for food in foods[:]:
-        if playerRect.colliderect(food):
-            foods.remove(food)
-
-    # Draw the food.
-    for i in range(len(foods)):
-        pygame.draw.rect(windowSurface, GREEN, foods[i])
-
-    # Draw the window onto the screen.
-    pygame.display.update()
-    mainClock.tick(40)
+#     # Draw the window onto the screen.
+#     pygame.display.update()
+#     mainClock.tick(40)
