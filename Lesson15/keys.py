@@ -56,8 +56,8 @@ while True:
             dinoRect.right = WINDOWWIDTH-1
         else: 
             dinoRect.right = dinoRect.right+SPEED
-    windowSurface.fill(WHITE)
-    windowSurface.blit(dino,dinoRect)
+        windowSurface.fill(WHITE)
+        windowSurface.blit(dino,dinoRect)
 
     #Draw the white background onto the surface.
     pygame.display.update()
