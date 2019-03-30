@@ -130,7 +130,6 @@ while True:
 
     dinoRectShort=pygame.Rect((dinoRect.left+20,dinoRect.top+20,88-20,96-20))
     cactusRectShort=pygame.Rect((cactusList[0].left+25,cactusList[0].top+25,34,70-30))
-    print(dinoRectShort)    
 
     if dinoRectShort.colliderect(cactusRectShort)==True:
         windowSurface.blit(gameOver, gameOverRect)
