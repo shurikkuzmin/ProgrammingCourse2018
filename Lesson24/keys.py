@@ -21,7 +21,7 @@ bigSprite  = pygame.image.load('sprite.png')
 bigSpriteRect = bigSprite.get_rect()
 
 rect = pygame.Rect((1336,0,88,96))
-dinoStanding = bigSprite.subsurface(rect)
+dinoStanding = pygame.transform.scale(bigSprite.subsurface(rect),(50,50))
 dinoStandingRect=dinoStanding.get_rect()
 
 rect= pygame.Rect((2,104,2400,26))
@@ -51,7 +51,7 @@ gameOverRect.center = (WINDOWWIDTH/2,WINDOWHEIGHT/2)
 dinoRunning=[0,0,0,0]
 for i in range(4):
     rect=pygame.Rect((1516+i*88,0,88,96))
-    dinoRunning[i]=bigSprite.subsurface(rect)
+    dinoRunning[i]=pygame.transform.scale(bigSprite.subsurface(rect), (50,50))
 
 SPEED = 5
 SPEED2= 10
@@ -128,7 +128,7 @@ while True:
     if  cactusList[0].right<0:
         cactusList.pop(0)
 
-    dinoRectShort=pygame.Rect((dinoRect.left+20,dinoRect.top+20,88-20,96-20))
+    dinoRectShort=pygame.Rect((dinoRect.left+20,dinoRect.top+20,50-20,50-20))
     cactusRectShort=pygame.Rect((cactusList[0].left+25,cactusList[0].top+25,34,70-30))
 
     if dinoRectShort.colliderect(cactusRectShort)==True:
